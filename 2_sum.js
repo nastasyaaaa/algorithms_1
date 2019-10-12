@@ -1,17 +1,17 @@
 /* sum */
 
-function sum (array, number)  // O(n ^ 2), Om(1)
+function sum (array, number)  // O(n), Om(n)
 {
-	for(let i = 0; i < array.length; i++) {
-		
-		for(let j = i + 1; j < array.length; j++) {
+	let set = new Set();
 
-			if(array[i] + array[j] === number) {
-				console.log(array[i] + '+' + array[j] + ' = ' + number);
-				return true;
-			}
+	for(let i = 0; i < array.length; i++) {
+		set.add(array[i]);
+	}
+
+	for(let i = 0; i < array.length; i++) {
+		if(set.has(number - array[i])) {
+			return true;
 		}
-	
 	}
 
 	return false;
