@@ -1,5 +1,5 @@
 /* 7 (binary) */
-function binaryHammingDistance(firstNumber, secondNumber) // O(?), Om(1)
+function binaryHammingDistance(firstNumber, secondNumber) // O(log(max(a,b))), Om(1)
 {
 	/* 3 = 00000000000000000000000000000011 */
 	/* 6 = 00000000000000000000000000000101 */
@@ -20,20 +20,23 @@ function binaryHammingDistance(firstNumber, secondNumber) // O(?), Om(1)
 /* 7 (decimal) */
 function decimalHammingDistance(firstNumber, secondNumber) // O(2 * length) = O(length) , Om(1)
 {
-	const firstNumberWord = firstNumber.toString(10);
-	const secondNumberWord = secondNumber.toString(10);	
-
-	if(firstNumberWord.length !== secondNumberWord.length){
-		throw new Error('numbers must be of the same length.')
-	}
-
 	let hammingDistance = 0;
 
-	for(let i = 0; i < firstNumberWord.length; i++){
-		if(firstNumberWord[i] !== secondNumberWord[i]) {
+	while(Math.trunc(firstNumber) !== 0 || Math.trunc(secondNumber) !== 0) {
+		
+		let firstRemainder = Math.trunc(firstNumber % 10);
+		let secondRemainder= Math.trunc(secondNumber % 10);
+
+
+		if(firstRemainder !== secondRemainder) {
 			hammingDistance++;
 		}
+
+		firstNumber /= 10;
+		secondNumber /= 10;
 	}
 
 	return hammingDistance;
 }
+
+console.log(decimalHammingDistance(1234567, 1256968));
